@@ -17,7 +17,7 @@ namespace test
             {
                 //client.DownloadFile("http://stackoverflow.com/questions/599275/how-can-i-download-html-source-in-c-sharp", @"C:\users\jacky\documents\localfile.html");
 
-                // Or you can get the file content without saving it:.
+                // Or you can get the file content without saving it:..
                 string htmlCode = client.DownloadString("http://kf2.gamebanana.com/maps/188863");
                 //...
                // string s = Regex.Match(htmlCode, @"<a class='Screenshot' href='(.+)'> ",RegexOptions.Singleline).Groups[1];
