@@ -20,9 +20,8 @@ namespace test
                 // Or you can get the file content without saving it:
                 string htmlCode = client.DownloadString("http://kf2.gamebanana.com/maps/188863");
                 //...
-                string s = Regex.Match(AuthorST, @"<strong>Summary\u003A</strong></p><p>\u0022(.+?)</p>", RegexOptions.Singleline).Groups[1].Value;
-                Console.WriteLine(s);
-                Console.Read();
+               // string s = Regex.Match(htmlCode, @"<a class='Screenshot' href='(.+)'> ",RegexOptions.Singleline).Groups[1];
+                Console.WriteLine(htmlCode);
             }
         }
     }
