@@ -1,0 +1,60 @@
+﻿<Window x:Class="KF2Tool.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:KF2Tool"
+        mc:Ignorable="d"
+        Title="Killing Floor 2 Map Tool" Height="494.542" Width="725" Background="White" Icon="Images/favicon.ico" ResizeMode="NoResize" HorizontalContentAlignment="Center" WindowStartupLocation="CenterScreen">
+    <Grid RenderTransformOrigin="0.5,0.5" Margin="0,0,4,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="715"/>
+        </Grid.ColumnDefinitions>
+        <Image x:Name="image1" Height="232" Margin="298,31,13,0" VerticalAlignment="Top" Source="Images/2016-01-08_00004.jpg">
+            <Image.OpacityMask>
+                <ImageBrush ImageSource="Images/2016-01-08_00004.jpg" Stretch="Uniform"/>
+            </Image.OpacityMask>
+        </Image>
+        <ListBox x:Name="listBox" Height="140" Margin="13,294,0,0" VerticalAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalAlignment="Left" Width="289">
+            <ListBoxItem Content="ListBoxItem"/>
+            <ListBoxItem Content="ListBoxItem"/>
+            <ListBoxItem Content="ListBoxItem"/>
+            <ListBoxItem Content="ListBoxItem"/>
+            <ListBoxItem Content="ListBoxItem"/>
+            <ListBoxItem Content="ListBoxItem"/>
+            <ListBoxItem Content="ListBoxItem"/>
+            <ListBoxItem Content="ListBoxItem"/>
+        </ListBox>
+        <Label x:Name="label" Content="Map by: I.P. Freely" HorizontalAlignment="Left" Margin="298,252,0,0" VerticalAlignment="Top" Padding="0,5,5,5"/>
+        <Label x:Name="label1" Content="Name of the map - KF" Margin="10,28,419,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16" Padding="0,5"/>
+        <ScrollViewer HorizontalAlignment="Left" Height="195" Margin="10,59,0,0" VerticalAlignment="Top" Width="278" Panel.ZIndex="-1">
+            <TextBlock x:Name="textBlock" TextWrapping="Wrap"><Run Text="Another bloody town. Another bloody defense. Only been here a minute and we can already hear their howls in the distance. We'll have to shoot, stab, and weld together whatever we can in order to win the day here... #grindhouse."/><LineBreak/><Run/><LineBreak/><Run Text="Updated to version 3 for exploit fixes"/><LineBreak/><Run/><LineBreak/><Run/><LineBreak/><Run/><LineBreak/><Run Text="Motormouth here, with my fifth and final map!"/><LineBreak/><Run/><LineBreak/><Run/><LineBreak/><Run/><LineBreak/><Run Text="This one's a lot smaller and tighter than my others, with just three trader pods in total."/><LineBreak/><Run/><LineBreak/><Run Text="Fight your way through the streets, alleys, and hastily-constructed barricades to keep the zeds off your back and reclaim this town!"/></TextBlock>
+        </ScrollViewer>
+        <ListBox x:Name="listBox_Copy" Height="140" Margin="0,294,13,0" VerticalAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalAlignment="Right" Width="288">
+            <ListBoxItem Content="ListBoxItem"/>
+            <ListBoxItem Content="ListBoxItem"/>
+            <ListBoxItem Content="ListBoxItem"/>
+            <ListBoxItem Content="ListBoxItem"/>
+            <ListBoxItem Content="ListBoxItem"/>
+            <ListBoxItem Content="ListBoxItem"/>
+            <ListBoxItem Content="ListBoxItem"/>
+            <ListBoxItem Content="ListBoxItem"/>
+        </ListBox>
+        <Menu x:Name="menu" HorizontalAlignment="Left" Height="21" VerticalAlignment="Top" Width="707">
+            <MenuItem Header="File">
+                <MenuItem Header="Select Killing Floor 2 Folder"/>
+            </MenuItem>
+            <MenuItem Header="Help">
+                <MenuItem Header="Webpage"/>
+                <Separator/>
+                <MenuItem Header="About"/>
+                <MenuItem Header="Donate"/>
+            </MenuItem>
+        </Menu>
+        <Button x:Name="button1" Content="Rem" Margin="334,343,334,0" VerticalAlignment="Top" Width="47"/>
+        <Button x:Name="button1_Copy" Content="Add" Margin="334,312,334,0" VerticalAlignment="Top"/>
+        <Button x:Name="button1_Copy1" Content="Clear" Margin="334,375,334,0" VerticalAlignment="Top" Width="47" ToolTip="This will clear the entire Local Map List!"/>
+        <Label x:Name="label3" Content="Online Map List" HorizontalAlignment="Left" Margin="13,268,0,0" VerticalAlignment="Top" FontWeight="Bold" Padding="0,5,5,5"/>
+        <Label x:Name="label3_Copy" Content="Local Map List" HorizontalAlignment="Left" Margin="414,268,0,0" VerticalAlignment="Top" FontWeight="Bold" Padding="0,5,5,5"/>
+    </Grid>
+</Window>
