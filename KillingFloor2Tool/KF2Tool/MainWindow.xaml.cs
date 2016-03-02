@@ -14,6 +14,9 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Net;
 using System.Text.RegularExpressions;
+using System.Diagnostics;
+using Newtonsoft.Json;
+using System.IO;
 
 namespace KF2Tool
 {
@@ -22,7 +25,11 @@ namespace KF2Tool
     /// </summary>
     public partial class MainWindow : Window
     {
-
+        int x = 1;
+        private void Donate_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start("https://www.paypal.me/korthals");
+        }
 
         public MainWindow()
         {
@@ -31,33 +38,50 @@ namespace KF2Tool
 
         private void TestButton_Click(object sender, RoutedEventArgs e)
         {
-            //This sets the information
+            //This sets the information.
             string ScreenshotURL;
             string NameMap;
-            string AuthorST;
             string Author;
             string Summary;
 
             using (WebClient client = new WebClient())
             {
-                string htmlCode = client.DownloadString("http://kf2.gamebanana.com/maps/188863");
+                //    string htmlCode = client.DownloadString("http://kf2.gamebanana.com/maps/188863");
 
-                NameMap = Regex.Match(htmlCode, @"<title>(.+?) ", RegexOptions.Singleline).Groups[1].Value;
-                ScreenshotURL = Regex.Match(htmlCode, @"<a class=\u0022Screenshot\u0022 href=\u0022(.+?).jpg\u0022>", RegexOptions.Singleline).Groups[1].Value + ".jpg";
-                AuthorST = Regex.Match(htmlCode, @"This is a Map submitted by(.+?)for", RegexOptions.Singleline).Groups[1].Value;
-                Author = Regex.Match(AuthorST, @"\u0022>(.+?)</a>", RegexOptions.Singleline).Groups[1].Value;
-                Summary = Regex.Match(htmlCode, @"<strong>Summary\u003A</strong></p><p>(.+?)</p>", RegexOptions.Singleline).Groups[1].Value;
+                //    NameMap = Regex.Match(htmlCode, @"<title>(.+?) ", RegexOptions.Singleline).Groups[1].Value;
+                //    ScreenshotURL = Regex.Match(htmlCode, @"<a class=\u0022Screenshot\u0022 href=\u0022(.+?).jpg\u0022>", RegexOptions.Singleline).Groups[1].Value + ".jpg";
+                //    AuthorST = Regex.Match(htmlCode, @"This is a Map submitted by(.+?)for", RegexOptions.Singleline).Groups[1].Value;
+                //    Author = Regex.Match(AuthorST, @"\u0022>(.+?)</a>", RegexOptions.Singleline).Groups[1].Value;
+                //    Summary = Regex.Match(htmlCode, @"<strong>Summary\u003A</strong></p><p>(.+?)</p>", RegexOptions.Singleline).Groups[1].Value;
+                //}
+
+                var response = WebRequest.Create("http://kf2.gamebanana.com/maps?api=SubmissionsListModule").GetResponse();
+                var strResponse = new StreamReader(response.GetResponseStream()).ReadToEnd();
+                Rootobject resObject = JsonConvert.DeserializeObject<Rootobject>(strResponse);
+                //dynamic resObject = JsonConvert.DeserializeObject(strResponse);
+                //foreach (var cellVal in resObject._aCellValues)
+                //{
+                //    Console.WriteLine(String.Format("Map: {0}, submitted by {1}\n", cellVal._sName, cellVal._aSubmitter._sUsername));
+                //}
+
+
+                NameMap = resObject._aCellValues[x]._sName;
+                Author = resObject._aCellValues[x]._aSubmitter._sUsername;
+                Summary = resObject._aCellValues[x]._sArticle;
+                ScreenshotURL = resObject._aCellValues[x]._sFirstThumbnailImageUrl;
+
+                //MapName.Content = NameMap;
+                lblAuthor.Content = $"Map by: {Author}.";
+                summary.Text = Summary;
+                Screenshot.Source = new BitmapImage(new Uri(ScreenshotURL));
+
             }
 
-            MapName.Content = NameMap;
-            lblAuthor.Content = $"Map by: {Author}.";
-            summary.Text = Summary;
-            Screenshot.Source = new BitmapImage(new Uri(ScreenshotURL));
         }
 
-        private void textBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void button1_Copy_Click(object sender, RoutedEventArgs e)
         {
-
+            x++;
         }
     }
 }

@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net;
 using System.Text.RegularExpressions;
+using System.IO;
+using Newtonsoft.Json;
 
 namespace test
 {
@@ -13,16 +15,22 @@ namespace test
 
         static void Main(string[] args)
         {
-            using (WebClient client = new WebClient()) // WebClient class inherits IDisposable
-            {
-                //client.DownloadFile("http://stackoverflow.com/questions/599275/how-can-i-download-html-source-in-c-sharp", @"C:\users\jacky\documents\localfile.html");
+            //using (WebClient client = new WebClient()) // WebClient class inherits IDisposable
+            //{
+            //    //client.DownloadFile("http://stackoverflow.com/questions/599275/how-can-i-download-html-source-in-c-sharp", @"C:\users\jacky\documents\localfile.html");
 
-                // Or you can get the file content without saving it:..
-                string htmlCode = client.DownloadString("http://kf2.gamebanana.com/maps/188863");
-                //...
-               // string s = Regex.Match(htmlCode, @"<a class='Screenshot' href='(.+)'> ",RegexOptions.Singleline).Groups[1];
-                Console.WriteLine(htmlCode);
-            }
+            //    // Or you can get the file content without saving it:..
+            //    string htmlCode = client.DownloadString("http://kf2.gamebanana.com/maps/188863");
+            //    //...
+            //   // string s = Regex.Match(htmlCode, @"<a class='Screenshot' href='(.+)'> ",RegexOptions.Singleline).Groups[1];
+            //    Console.WriteLine(htmlCode);
+            //}
+
+            var response = WebRequest.Create("http://gamebanana.com/api?request=Member.1382.[%22user_title%22]").GetResponse();
+            var strResponse = new StreamReader(response.GetResponseStream()).ReadToEnd();
+            dynamic resObject = JsonConvert.DeserializeObject(strResponse);
+            Console.WriteLine(resObject[0]);
+            Console.Read();
         }
     }
 }
