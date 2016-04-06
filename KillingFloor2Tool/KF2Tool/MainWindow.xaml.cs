@@ -36,6 +36,8 @@ namespace KF2Tool
             InitializeComponent();
         }
 
+
+
         private void TestButton_Click(object sender, RoutedEventArgs e)
         {
             //This sets the information.
@@ -44,8 +46,7 @@ namespace KF2Tool
             string Author;
             string Summary;
 
-            using (WebClient client = new WebClient())
-            {
+            
                 //    string htmlCode = client.DownloadString("http://kf2.gamebanana.com/maps/188863");
 
                 //    NameMap = Regex.Match(htmlCode, @"<title>(.+?) ", RegexOptions.Singleline).Groups[1].Value;
@@ -72,16 +73,47 @@ namespace KF2Tool
 
                 //MapName.Content = NameMap;
                 lblAuthor.Content = $"Map by: {Author}.";
-                summary.Text = Summary;
+                //summary.Text = Summary;
                 Screenshot.Source = new BitmapImage(new Uri(ScreenshotURL));
 
-            }
+            
 
         }
 
         private void button1_Copy_Click(object sender, RoutedEventArgs e)
         {
             x++;
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            var info = GetInfo();
+            foreach (var item in info._aCellValues)
+                OnlineList.Items.Add(item);
+        }
+        
+        /// <summary>
+        /// Gets the maps info from the server
+        /// </summary>
+        /// <returns></returns>
+        private Rootobject GetInfo()
+        {
+            var response = WebRequest.Create("http://kf2.gamebanana.com/maps?api=SubmissionsListModule").GetResponse();
+            var strResponse = new StreamReader(response.GetResponseStream()).ReadToEnd();
+            return JsonConvert.DeserializeObject<Rootobject>(strResponse);
+        }
+
+        private void OnlineList_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            var item =
+                ItemsControl.ContainerFromElement(OnlineList, e.OriginalSource as DependencyObject) as ListBoxItem;
+            if (item != null)
+            {
+                var infoBits = item.Content as _Acellvalues;
+                lblAuthor.Content = $"Map by: {infoBits._aSubmitter._sUsername}.";
+                Summary.NavigateToString(infoBits._sArticle);
+                Screenshot.Source = new BitmapImage(new Uri(infoBits._sFirstThumbnailImageUrl));
+            }
         }
     }
 }
