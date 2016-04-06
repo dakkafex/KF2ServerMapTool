@@ -17,6 +17,7 @@ using System.Text.RegularExpressions;
 using System.Diagnostics;
 using Newtonsoft.Json;
 using System.IO;
+using System.Windows.Media.Animation;
 
 namespace KF2Tool
 {
@@ -25,6 +26,8 @@ namespace KF2Tool
     /// </summary>
     public partial class MainWindow : Window
     {
+        List<_Acellvalues> SelectedMaps = new List<_Acellvalues>();
+        List<_Acellvalues> CachedMaps = new List<_Acellvalues>();
         int x = 1;
         private void Donate_Click(object sender, RoutedEventArgs e)
         {
@@ -36,7 +39,15 @@ namespace KF2Tool
             InitializeComponent();
         }
 
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            var info = GetInfo();
+            foreach (var item in info._aCellValues)
+                OnlineList.Items.Add(item);
 
+            //need to load the cached files
+            CachedMaps = LoadCacheList();
+        }
 
         private void TestButton_Click(object sender, RoutedEventArgs e)
         {
@@ -82,15 +93,21 @@ namespace KF2Tool
 
         private void button1_Copy_Click(object sender, RoutedEventArgs e)
         {
-            x++;
+            try
+            {
+                var item = OnlineList.SelectedItems[0] as _Acellvalues;
+                if (!CachedMaps.Contains(item) & !LocalList.Items.Contains(item)) //don't want a duplicate
+                {
+                    LocalList.Items.Add(item);
+                }
+            }
+            catch
+            {
+                // ignored
+            }
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            var info = GetInfo();
-            foreach (var item in info._aCellValues)
-                OnlineList.Items.Add(item);
-        }
+
         
         /// <summary>
         /// Gets the maps info from the server
@@ -105,8 +122,13 @@ namespace KF2Tool
 
         private void OnlineList_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
+           LoadListItemInfo(OnlineList, e);
+        }
+
+        private void LoadListItemInfo(ListBox box, MouseButtonEventArgs e)
+        {
             var item =
-                ItemsControl.ContainerFromElement(OnlineList, e.OriginalSource as DependencyObject) as ListBoxItem;
+               ItemsControl.ContainerFromElement(box, e.OriginalSource as DependencyObject) as ListBoxItem;
             if (item != null)
             {
                 var infoBits = item.Content as _Acellvalues;
@@ -114,6 +136,32 @@ namespace KF2Tool
                 Summary.NavigateToString(infoBits._sArticle);
                 Screenshot.Source = new BitmapImage(new Uri(infoBits._sFirstThumbnailImageUrl));
             }
+        }
+
+        private List<_Acellvalues> LoadCacheList()
+        {
+            var line = "";
+            if (!File.Exists("download.cache"))
+                return new List<_Acellvalues>();
+            using (var sr = new StreamReader("download.cache"))
+            {
+                line = sr.ReadToEnd();
+            }
+
+            return JsonConvert.DeserializeObject<List<_Acellvalues>>(line);
+        }
+
+        private void SaveToCacheFile(List<_Acellvalues> maps)
+        {
+            using (var sw = new StreamWriter("download.cache"))
+            {
+                sw.Write(JsonConvert.SerializeObject(maps));
+            }
+        }
+
+        private void LocalList_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            LoadListItemInfo(LocalList, e);
         }
     }
 }

@@ -18,15 +18,8 @@
         <ListBox x:Name="OnlineList" Height="140" Margin="13,311,0,0" DisplayMemberPath="_sName" VerticalAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalAlignment="Left" Width="289" PreviewMouseDown="OnlineList_PreviewMouseDown"/>
         <Label x:Name="lblAuthor" Content="Map by: I.P. Freely" HorizontalAlignment="Left" Margin="298,267,0,0" VerticalAlignment="Top" Padding="0,5,5,5"/>
         <Label x:Name="MapName" Content="Name of the map - KF" Margin="10,28,419,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16" Padding="0,5"/>
-        <ListBox x:Name="LocalList" Height="140" Margin="0,311,13,0" VerticalAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalAlignment="Right" Width="288">
-            <ListBoxItem Content="ListBoxItem"/>
-            <ListBoxItem Content="ListBoxItem"/>
-            <ListBoxItem Content="ListBoxItem"/>
-            <ListBoxItem Content="ListBoxItem"/>
-            <ListBoxItem Content="ListBoxItem"/>
-            <ListBoxItem Content="ListBoxItem"/>
-            <ListBoxItem Content="ListBoxItem"/>
-            <ListBoxItem Content="ListBoxItem"/>
+        <ListBox x:Name="LocalList" Height="140" Margin="0,311,13,0" DisplayMemberPath="_sName" VerticalAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalAlignment="Right" Width="288" PreviewMouseDown="LocalList_PreviewMouseDown">
+            
         </ListBox>
         <Menu x:Name="menu" Height="21" VerticalAlignment="Top" Margin="0,0,-3,0">
             <MenuItem Header="File">
