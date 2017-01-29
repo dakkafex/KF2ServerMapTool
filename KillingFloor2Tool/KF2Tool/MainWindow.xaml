@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KF2Tool"
         mc:Ignorable="d"
-        Title="Killing Floor 2 Map Tool" Height="517.542" Width="725" Icon="Images/favicon.ico" ResizeMode="NoResize" HorizontalContentAlignment="Center" WindowStartupLocation="CenterScreen" Background="White" Loaded="Window_Loaded">
+        Title="Killing Floor 2 Map Tool" Height="517.542" Width="725" Icon="Images/favicon.ico" ResizeMode="NoResize" HorizontalContentAlignment="Center" WindowStartupLocation="CenterScreen" Background="White">
     <Grid RenderTransformOrigin="0.5,0.5" Margin="0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="715"/>
@@ -15,12 +15,10 @@
                 <ImageBrush ImageSource="Images/2016-01-08_00004.jpg" Stretch="Uniform"/>
             </Image.OpacityMask>
         </Image>
-        <ListBox x:Name="OnlineList" Height="140" Margin="13,311,0,0" DisplayMemberPath="_sName" VerticalAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalAlignment="Left" Width="289" PreviewMouseDown="OnlineList_PreviewMouseDown"/>
+        <ListBox x:Name="OnlineList" Height="140" Margin="13,311,0,0" DisplayMemberPath="_sName" VerticalAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalAlignment="Left" Width="289"/>
         <Label x:Name="lblAuthor" Content="Map by: I.P. Freely" HorizontalAlignment="Left" Margin="298,267,0,0" VerticalAlignment="Top" Padding="0,5,5,5"/>
         <Label x:Name="MapName" Content="Name of the map - KF" Margin="10,28,419,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16" Padding="0,5"/>
-        <ListBox x:Name="LocalList" Height="140" Margin="0,311,13,0" DisplayMemberPath="_sName" VerticalAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalAlignment="Right" Width="288" PreviewMouseDown="LocalList_PreviewMouseDown">
-            
-        </ListBox>
+        <ListBox x:Name="LocalList" Height="140" Margin="0,311,13,0" DisplayMemberPath="_sName" VerticalAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalAlignment="Right" Width="288"/>
         <Menu x:Name="menu" Height="21" VerticalAlignment="Top" Margin="0,0,-3,0">
             <MenuItem Header="File">
                 <MenuItem Header="Select Killing Floor 2 Folder"/>
@@ -33,15 +31,12 @@
             </MenuItem>
         </Menu>
         <Button x:Name="button1" Content="Rem" Margin="334,360,334,0" VerticalAlignment="Top" Width="47"/>
-        <Button x:Name="button1_Copy" Content="Add" Margin="334,329,334,0" VerticalAlignment="Top" Click="button1_Copy_Click"/>
-        <Button x:Name="button1_Copy1" Content="Clear" Margin="334,392,334,0" VerticalAlignment="Top" Width="47" ToolTip="This will clear the entire Local Map List!"/>
+        <Button x:Name="button1_Copy" Content="Add" Margin="334,329,334,0" VerticalAlignment="Top"/>
         <Label x:Name="label3" Content="Online Map List" HorizontalAlignment="Left" Margin="13,285,0,0" VerticalAlignment="Top" FontWeight="Bold" Padding="0,5,5,5"/>
         <Label x:Name="label3_Copy" Content="Local Map List" HorizontalAlignment="Left" Margin="414,285,0,0" VerticalAlignment="Top" FontWeight="Bold" Padding="0,5,5,5"/>
         <ProgressBar HorizontalAlignment="Left" Height="8" Margin="111,295,0,0" VerticalAlignment="Top" Width="182"/>
-        <Button x:Name="TestButton" Content="Test" HorizontalAlignment="Left" Margin="320,436,0,0" VerticalAlignment="Top" Width="75" Click="TestButton_Click"/>
-        <ScrollViewer HorizontalAlignment="Left" Height="204" Margin="10,59,0,0" VerticalAlignment="Top" Width="273">
-            <!--<TextBlock x:Name="summary" TextWrapping="Wrap"><Run/><LineBreak/><Run/></TextBlock>-->
-            <WebBrowser x:Name="Summary"/>
-        </ScrollViewer>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="10,64,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="200" Width="268"/>
+        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="324,431,0,0" VerticalAlignment="Top" Width="75" Click="button_Click"/>
+
     </Grid>
 </Window>
