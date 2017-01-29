@@ -41,7 +41,7 @@ namespace KF2Tool
             MapData AllMaps = new MapData();
             foreach (Map map in AllMaps.MapCollection())
             {
-                OnlineList.Items.Add(map.MapName);
+                OnlineList.Items.Add(map.MapName); 
             }
 
         }
