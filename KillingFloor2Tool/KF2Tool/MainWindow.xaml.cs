@@ -132,7 +132,7 @@ namespace KF2Tool
             if (item != null)
             {
                 var infoBits = item.Content as _Acellvalues;
-                lblAuthor.Content = $"Map by: {infoBits._aSubmitter._sUsername}.";
+                //lblAuthor.Content = $"Map by: {infoBits._aSubmitter._sUsername}.";
                 Summary.NavigateToString(infoBits._sArticle);
                 Screenshot.Source = new BitmapImage(new Uri(infoBits._sFirstThumbnailImageUrl));
             }

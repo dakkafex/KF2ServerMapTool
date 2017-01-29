@@ -7,30 +7,46 @@ using System.Net;
 using System.Text.RegularExpressions;
 using System.IO;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace test
 {
     class Program
     {
 
+        static public JObject GetBananaJson(int Page)
+        {
+            var response = WebRequest.Create("http://gamebanana.com/maps/games/5306?vl[page]=" + Page + "&mid=SubmissionsList&api=SubmissionsListModule").GetResponse();
+            var strResponse = new StreamReader(response.GetResponseStream()).ReadToEnd();
+            JObject o = JObject.Parse(strResponse);
+
+            return o;
+        }
+
         static void Main(string[] args)
         {
-            //using (WebClient client = new WebClient()) // WebClient class inherits IDisposable
-            //{
-            //    //client.DownloadFile("http://stackoverflow.com/questions/599275/how-can-i-download-html-source-in-c-sharp", @"C:\users\jacky\documents\localfile.html");
+            JObject bob = GetBananaJson(1);
 
-            //    // Or you can get the file content without saving it:..
-            //    string htmlCode = client.DownloadString("http://kf2.gamebanana.com/maps/188863");
-            //    //...
-            //   // string s = Regex.Match(htmlCode, @"<a class='Screenshot' href='(.+)'> ",RegexOptions.Singleline).Groups[1];
-            //    Console.WriteLine(htmlCode);
-            //}
+            int PageCount = (int)bob["_aPageNavigation"]["_nPagesInList"];
+            int MapPerPage = bob["_aCellValues"].Count();
 
-            var response = WebRequest.Create("http://gamebanana.com/api?request=Member.1382.[%22user_title%22]").GetResponse();
-            var strResponse = new StreamReader(response.GetResponseStream()).ReadToEnd();
-            dynamic resObject = JsonConvert.DeserializeObject(strResponse);
-            Console.WriteLine(resObject[0]);
+            for (int i = 1; i <= PageCount; i++)
+            {
+                bob = GetBananaJson(i);
+                for (int j = 0; j < MapPerPage; j++)
+                {
+
+                    string je = (string)bob["_aCellValues"][j]["_aOwner"]["_sUsername"];
+                    Console.WriteLine(je);
+
+                }
+                Console.WriteLine();
+            }
+
+
+
             Console.Read();
         }
     }
 }
+
