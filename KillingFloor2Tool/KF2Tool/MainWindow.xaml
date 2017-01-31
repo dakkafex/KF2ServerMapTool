@@ -15,7 +15,7 @@
                 <ImageBrush ImageSource="Images/2016-01-08_00004.jpg" Stretch="Uniform"/>
             </Image.OpacityMask>
         </Image>
-        <ListBox x:Name="OnlineList" Height="140" Margin="13,311,0,0" DisplayMemberPath="_sName" VerticalAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalAlignment="Left" Width="289"/>
+        <ListBox x:Name="OnlineList" Height="140" Margin="13,311,0,0" DisplayMemberPath="_sName" VerticalAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalAlignment="Left" Width="289" SelectionChanged="OnlineList_SelectionChanged"/>
         <Label x:Name="lblAuthor" Content="Map by: I.P. Freely" HorizontalAlignment="Left" Margin="298,267,0,0" VerticalAlignment="Top" Padding="0,5,5,5"/>
         <Label x:Name="MapName" Content="Name of the map - KF" Margin="10,28,419,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16" Padding="0,5"/>
         <ListBox x:Name="LocalList" Height="140" Margin="0,311,13,0" DisplayMemberPath="_sName" VerticalAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalAlignment="Right" Width="288"/>
@@ -34,9 +34,11 @@
         <Button x:Name="button1_Copy" Content="Add" Margin="334,329,334,0" VerticalAlignment="Top"/>
         <Label x:Name="label3" Content="Online Map List" HorizontalAlignment="Left" Margin="13,285,0,0" VerticalAlignment="Top" FontWeight="Bold" Padding="0,5,5,5"/>
         <Label x:Name="label3_Copy" Content="Local Map List" HorizontalAlignment="Left" Margin="414,285,0,0" VerticalAlignment="Top" FontWeight="Bold" Padding="0,5,5,5"/>
-        <ProgressBar HorizontalAlignment="Left" Height="8" Margin="111,295,0,0" VerticalAlignment="Top" Width="182"/>
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="10,64,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="200" Width="268"/>
         <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="324,431,0,0" VerticalAlignment="Top" Width="75" Click="button_Click"/>
+        <ScrollViewer HorizontalAlignment="Left" Height="199" Margin="13,64,0,0" VerticalAlignment="Top" Width="267">
+            <TextBlock x:Name="MapArticle" TextWrapping="Wrap" Text="TextBlock"/>
+        </ScrollViewer>
+        <Label x:Name="levelCount" Content="### levels" HorizontalAlignment="Left" Margin="238,285,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

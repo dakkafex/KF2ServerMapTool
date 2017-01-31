@@ -18,31 +18,51 @@ using System.Diagnostics;
 using Newtonsoft.Json;
 using System.IO;
 using System.Windows.Media.Animation;
+using System.ComponentModel;
 
 namespace KF2Tool
 {
 
     public partial class MainWindow : Window
     {
+        MapData AllMaps = new MapData();
+
+
+        public MainWindow()
+        {
+            InitializeComponent();
+
+            OnlineList.Items.Clear();
+            foreach (Map map in AllMaps.MapList)
+            {
+                ListBoxItem row = new ListBoxItem();
+                row.Content = map.MapName;
+                OnlineList.Items.Add(row);
+            }
+
+            OnlineList.SelectedIndex = 0;
+        }
 
         private void Donate_Click(object sender, RoutedEventArgs e)
         {
             Process.Start("https://www.paypal.me/korthals");
         }
 
-        public MainWindow()
-        {
-
-            InitializeComponent();
-        }
-
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            MapData AllMaps = new MapData();
-            foreach (Map map in AllMaps.MapCollection())
-            {
-                OnlineList.Items.Add(map.MapName); 
-            }
+            //test button
+
+        }
+
+
+        //Code for displaying information of selected item
+        private void OnlineList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            MapName.Content = AllMaps.MapList[OnlineList.SelectedIndex].MapName;
+            MapArticle.Text = AllMaps.MapList[OnlineList.SelectedIndex].MapArticle;
+            lblAuthor.Content = "Map by: " + AllMaps.MapList[OnlineList.SelectedIndex].Author;
+            Screenshot.Source = new BitmapImage(new Uri(AllMaps.MapList[OnlineList.SelectedIndex].PreviewImage));
+            levelCount.Content = AllMaps.MapList.Count +" Levels";
 
         }
     }

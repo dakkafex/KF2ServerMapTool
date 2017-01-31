@@ -6,12 +6,15 @@ using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using System.Net;
 using System.IO;
+using System.ComponentModel;
 
 namespace KF2Tool
 {
     class MapData
     {
-        static public JObject GetBananaJson(int Page)
+        public List<Map> MapList { get; set; }
+
+        static private JObject GetBananaJson(int Page)
         {
             //turns Gamebanana's Json dump into usefull data in the form of a Json object...black magic
             var response = WebRequest.Create("http://gamebanana.com/maps/games/5306?vl[page]=" + Page + "&mid=SubmissionsList&api=SubmissionsListModule").GetResponse();
@@ -21,7 +24,8 @@ namespace KF2Tool
             return o;
         }
 
-        public List<Map> MapCollection()
+
+        private List<Map> MapCollection()
         {
             JObject MapBanana = GetBananaJson(1);
 
@@ -43,11 +47,15 @@ namespace KF2Tool
                         MapArticle = (string)MapBanana["_aCellValues"][j]["_sArticle"],
                         PreviewImage = (string)MapBanana["_aCellValues"][j]["_sFirstThumbnailImageUrl"],
                         MapId = (int)MapBanana["_aCellValues"][j]["_idItemRow"]
-                });
+                    });
                 }
             }
             return maps;
         }
-
+        //stores all the map data in a usable list so it doesnt build the entire thing with every little mouseclick -.-
+        public MapData()
+        {
+            MapList = MapCollection();
+        }
     }
 }
