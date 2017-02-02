@@ -26,12 +26,12 @@ namespace KF2Tool
     public partial class MainWindow : Window
     {
         MapData AllMaps = new MapData();
-
+        MapDownload download = new MapDownload();
 
         public MainWindow()
         {
             InitializeComponent();
-
+            //populates the listbox with all maps found on GameBanana
             OnlineList.Items.Clear();
             foreach (Map map in AllMaps.MapList)
             {
@@ -45,15 +45,9 @@ namespace KF2Tool
 
         private void Donate_Click(object sender, RoutedEventArgs e)
         {
+            //I R in need of subway sandwiches, support my bad habbit
             Process.Start("https://www.paypal.me/korthals");
         }
-
-        private void button_Click(object sender, RoutedEventArgs e)
-        {
-            //test button
-
-        }
-
 
         //Code for displaying information of selected item
         private void OnlineList_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -62,8 +56,13 @@ namespace KF2Tool
             MapArticle.Text = AllMaps.MapList[OnlineList.SelectedIndex].MapArticle;
             lblAuthor.Content = "Map by: " + AllMaps.MapList[OnlineList.SelectedIndex].Author;
             Screenshot.Source = new BitmapImage(new Uri(AllMaps.MapList[OnlineList.SelectedIndex].PreviewImage));
-            levelCount.Content = AllMaps.MapList.Count +" Levels";
+            levelCount.Content = AllMaps.MapList.Count + " Levels";
 
+        }
+
+        private void DownloadBtn_Click(object sender, RoutedEventArgs e)
+        {
+            download.AddMap(188039);
         }
     }
 }

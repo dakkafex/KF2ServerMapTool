@@ -52,7 +52,7 @@ namespace KF2Tool
             }
             return maps;
         }
-        //stores all the map data in a usable list so it doesnt build the entire thing with every little mouseclick -.-
+        //stores all the map data in a usable list so it doesnt re-build the entire thing with every little mouseclick -.-
         public MapData()
         {
             MapList = MapCollection();
