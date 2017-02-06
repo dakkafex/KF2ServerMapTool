@@ -24,8 +24,7 @@ namespace KF2Tool
         public void AddMap(int MapId)
         {
             string DownloadUri = (string)GetBananaJson(MapId)["_sOfficialDirectDownloadUrl"];
-
-            
         }
+        //TODO write code for downloading and extrating .KF2 file to specified path
     }
 }

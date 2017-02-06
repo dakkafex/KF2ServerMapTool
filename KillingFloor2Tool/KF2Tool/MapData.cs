@@ -44,7 +44,7 @@ namespace KF2Tool
                     {
                         Author = (string)MapBanana["_aCellValues"][j]["_aOwner"]["_sUsername"],
                         MapName = (string)MapBanana["_aCellValues"][j]["_sName"],
-                        MapArticle = (string)MapBanana["_aCellValues"][j]["_sArticle"],
+                        MapArticle = (string)MapBanana["_aCellValues"][j]["_sArticle"], //TODO turn the html into plain text. w or w/o keeping the markup
                         PreviewImage = (string)MapBanana["_aCellValues"][j]["_sFirstThumbnailImageUrl"],
                         MapId = (int)MapBanana["_aCellValues"][j]["_idItemRow"]
                     });

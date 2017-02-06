@@ -25,7 +25,9 @@ namespace KF2Tool
 
     public partial class MainWindow : Window
     {
+        //new instance of the map objects
         MapData AllMaps = new MapData();
+        //new instance of the download logic
         MapDownload download = new MapDownload();
 
         public MainWindow()
